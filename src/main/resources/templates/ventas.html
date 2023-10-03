@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/ventas.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Ventas</title>
+</head>
+
+<body>
+    <div class="encabezado">
+        <header>
+            <div class="titulo">
+                <h1>FERRETERIA MEISSEN</h1>
+            </div>
+            <div class="logo">
+                <img src="../static/img/ferreteria.jpeg" alt="logo ferreteria">
+            </div>
+        </header>
+        <nav class="navbar">
+            <div class="lista">
+                <button class="btn-login">
+                    <a class="btn-login" href="#">Cerrar Sesión</a>
+                </button>
+            </div>
+        </nav>
+    </div>
+    <div id="contenido">
+        <div id="menu-lateral">
+            <h3>Administrador</h3>
+            <div id="foto">
+                <img src="../static/img/administrador ferreteria.jpg" alt="">
+            </div>
+            <div class="nom-usuario">
+
+            </div>
+            <select id="selec-admin" onchange="location.href=this.value;">
+                <option selected>Opciones</option>
+                <option value="vistaAdmin.html">Inicio</option>
+                <option value="inventario.html">Gestión Catálogo e Inventario</option>
+                <option value="catalogoAdmin.html">Vista catalogo</option>
+                <option value="gestionarFuncionarios.html">Gestionar Usuarios</option>
+                <option value="ventas.html">Ventas</option>
+                <option value="peticiones.html">peticiones</option>
+            </select>
+        </div>
+        <div class="inventario">
+            <h4 id="titulo-tabla">Documento de Venta</h4>
+            <div id="conten-venta">
+                <form id="formulario-venta" action="#" method="POST">
+                    <div id="contenidoUno">
+
+
+                        <div class="input-derecha">
+                            <label for="codigo">Código</label>
+                            <input type="text" id="id" name="id" placeholder="Código">
+                        </div>
+                        <div class="input-derecha">
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" id="descripcion" placeholder="Descripción" name="descripcion">
+                        </div>
+                        <div class="input-izquierda">
+                            <label for="Categoria">Categoria</label>
+                            <select name="categoria" id="select-Categoria">
+                                <option selected="selected" value="1">Herramientas</option>
+                                <option value="2">Pinturas</option>
+                                <option value="3">Cementos</option>
+                                <option value="4">Herramientas Electricas</option>
+                                <option value="5">Carpinteria</option>
+                                <option value="6">Tornilleria</option>
+                                <option value="7">Plomeria</option>
+                                <option value="8">Jardineria</option>
+                                <option value="9">Accesorios</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="contenidoUno">
+                        <div class="input-derecha">
+                            <label for="producto">Producto</label>
+                            <input type="text" id="producto" name="producto" placeholder="Producto">
+                        </div>
+                        <div class="input-izquierda">
+                            <label for="descuento">Precio UNI</label>
+                            <input type="text" id="precio" name="precio" placeholder="Precio UNI">
+                        </div>
+                        <div class="input-derecha">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad">
+                        </div>
+                        <div class="input-izquierda">
+                            <label for="imagen">Imagen</label>
+                            <input id="text" id="imagen" name="imagen" placeholder="Ruta Imagen">
+                        </div>
+                    </div>
+                    <div id="conten-botones">
+                        <button id="btn-venta" type="submit" name="guardar">
+                            <i class="fas fa-save"></i><i class="fas fa-arrow-circle-right"></i> Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+                <h4 id="titulo-tabla">Ventas</h4>
+                <div id="tabla">
+                    <table>
+                        <tr>
+                            <th id="celda-principal">id</th>
+                            <th id="celda-principal">Producto</th>
+                            <th id="celda-principal">Precio</th>
+                            <th id="celda-principal">Cantidad</th>
+                            <th id="celda-principal">Descripción</th>
+                            <th id="celda-principal">Categoría</th>
+                            <th id="celda-principal">Acciones</th>
+                        </tr>
+                            <tr>
+                                <td><?php echo $row['idcodigo']; ?></td>
+                                <td><?php echo $row['producto']; ?></td>
+                                <td><?php echo $row['precio_unitario']; ?></td>
+                                <td><?php echo $row['cantidad']; ?></td>
+                                <td><?php echo $row['descripcion']; ?></td>
+                                <td>
+
+                                </td>
+                                <td class="acciones">
+                                    <form action="#" method="POST">
+                                        <input type="hidden" name="id" value="<?php echo $row['idcodigo']; ?>">
+                                        <button type="submit" name="editar"><i class="fas fa-edit"></i></button>
+                                    </form>
+                                    <form action="#" method="POST" onsubmit="return confirmarEliminacion();">
+                                        <input type="hidden" name="id" value="<?php echo $row['idcodigo']; ?>">
+                                        <button type="submit" name="eliminar"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+
+                <script>
+                    function confirmarEliminacion() {
+                        return confirm("¿Estás seguro de que deseas eliminar este producto?");
+                    }
+                </script>
+        </div>
+    </div>
+    <footer>
+        <h4>Ferreteria Meissen</h4>
+        <div class="enlaces">
+            <ul>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="#">Catalogo</a></li>
+                        <li><a href="#">Pintura</a></li>
+                        <li><a href="#">Electricas</a></li>
+                        <li><a href="#">Herramientas</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Carpinteria</a></li>
+                        <li><a href="#">Plomeria</a></li>
+                        <li><a href="#">Jardineria</a></li>
+            </ul>
+        </div>
+        <h4>Redes sociales</h4>
+        <div class="sociales">
+        <div class="sociales-link">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <p>Derechos de autor &copy; 2023 Ferretería Meissen. Todos los derechos reservados.</p>
+        </div>
+        </div>
+    </footer>
+</body>
+</html>

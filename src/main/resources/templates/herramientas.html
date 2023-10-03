@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>Ferreteria Meissen</title>
+</head>
+<body>
+    <div class="encabezado">
+        <header>
+            <div class = titulo>
+            <h1>FERRETERIA MEISSEN</h1>
+            </div>    
+            <div class="logo" >
+            <img src="../static/img/ferreteria.jpeg" alt="logo ferreteria">
+            </div>
+        </header>
+        <nav class="navbar">
+            <div class="lista">
+            <a href="#" class="Catalogo">Nosotros</a>
+            <a href="index.html" class="Catalogo">Catalogo</a>
+            <a href="pintura.html" class="Pintura">Pintura</a>
+            <a href="electricas.html" class="Electricas">Electricas</a>
+            <a href="herramientas.html" class="Herramientas_Manuales">Herramientas</a>
+            <a href="accesorios.html" class="Accesorios">Accesorios</a>
+            <a href="carpinteria.html" class="Accesorios">Carpinteria</a>
+            <a href="plomeria.html" class="Accesorios">Plomeria</a>
+            <a href="jardineria.html" class="Accesorios">Jardineria</a>
+            <button class="btn-login">
+                <a class="btn-login"href="loginCliente.php">Acceder</a>
+            </button>
+            <button class="btn-login">
+                <a class="btn-login"href="registro.html">Regístrate</a>
+            </button>
+            </div>
+            </nav>
+        </div>
+        <div class="slider">
+            <ul>
+                <li>
+                    <img src="../static/img/ferreteria-norte-banner.jpg" alt="Herramientas1">
+                </li>
+                <li>
+                    <img src="../static/img/herramientas-png.png" alt="Herramientas2">
+                </li>
+                <li>
+                    <img src="../static/img/slide1-1ferreteria.png" alt="Herramientas3">
+                </li>
+                <li>
+                    <img src="../static/img/ferreteria-ferromar-.jpg" alt="Herramientas4">
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h2 class="catalogo">Productos</h2>
+    <section class="contenedor">
+        <div class="contenedor-items">
+            <?php
+            $sql = "SELECT * FROM productos";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                    <div class="item">
+                        <span class="titulo-item"><?php echo $row["nombreProductos"]; ?> </span>
+                        <img class="img-catalogo" src="<?php echo $row["imagen"]; ?>">
+                        <span class="precio-item">$ <?php echo number_format($row["valorProducto"], 0, ',', '.'); ?></span>
+                        <button class="boton-item"
+                                data-titulo="<?php echo $row["nombreProductos"]; ?>"
+                                data-imagen="<?php echo $row["imagen"]; ?>"
+                                data-precio="<?php echo $row["valorProducto"]; ?>">
+                            Agregar al Carrito
+                        </button>
+                    </div> 
+                    <?php                            
+                }
+            } else {
+                echo "No se encontraron resultados.";
+            }
+            ?>
+        <div class="icono-carrito">
+            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+    </div>
+</section>
+</body>
+<footer>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <h4>Ferreteria Meissen</h4>
+    <div class="enlaces">
+        <ul>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Catalogo</a></li>
+                    <li><a href="#">Pintura</a></li>
+                    <li><a href="#">Electricas</a></li>
+                    <li><a href="#">Herramientas</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                    <li><a href="#">Carpinteria</a></li>
+                    <li><a href="#">Plomeria</a></li>
+                    <li><a href="#">Jardineria</a></li>
+        </ul>
+    </div>
+    <h4>Redes sociales</h4>
+    <div class="sociales">
+    <div class="sociales-link">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <p>Derechos de autor &copy; 2023 Ferretería Meissen. Todos los derechos reservados.</p>
+    </div>
+    </div>
+</footer>
+</html>
